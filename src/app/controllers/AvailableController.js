@@ -30,13 +30,13 @@ class AvailableController {
       '17:00',
       '18:00'
     ]
-
     const available = schedule.map(time => {
       const [hour, minute] = time.split(':')
       const value = date
         .hour(hour)
         .minute(minute)
         .second(0)
+
       return {
         time,
         value: value.format(),
@@ -45,7 +45,6 @@ class AvailableController {
           !appointments.find(a => moment(a.date).format('HH:mm') === time)
       }
     })
-
     return res.render('available/index', { available })
   }
 }

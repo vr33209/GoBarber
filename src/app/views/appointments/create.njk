@@ -9,10 +9,10 @@
           <strong>{{provider.name}}</strong>
         </div>
       </div>
-        <form action="/app/appointments/new{{provider.id}}" method="post">
-          <input type="text" class="flatpickr" placeholder="Esccolha uma data">
+        <form action="/app/appointments/new/{{provider.id}}" method="POST">
+          <input type="text" class="flatpickr" placeholder="Escolha uma data">
 
-            <div class="hours"></div>
+            <div id="hours"></div>
             <button type="submit">Agendar</button>
         </form>
   </div>
@@ -22,11 +22,12 @@
       dateFormat:'d/m/y',
       onChange: function(date) {
         fetch(`/app/available/{{provider.id}}?date=${date[0].getTime()}`).then(function (response){
-          response.text().then(function(html){
+          response.text().then( function ( html ){
             document.getElementById('hours').innerHTML = html
           })
         })
       }
+
     })
   </script>
 {% endblock %}
